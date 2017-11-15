@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
+                    <div class="panel-heading">User</div>
 
                     <div class="panel-body">
-                        I'm an example component!
+                        {{ user }}
                     </div>
                 </div>
             </div>
@@ -15,9 +15,23 @@
 </template>
 
 <script>
+
+    import axios from 'axios';
+
     export default {
-        mounted() {
-            console.log('Component mounted.')
+      data() {
+        return {
+          user : {}
         }
+      },
+      mounted() {
+        console.log('Component mounted.')
+        axios.get('/api/user').then( response => {
+          this.user = response.data
+          console.log(response.data)
+        }).catch( error => {
+          console.log(error)
+        })
+      }
     }
 </script>
