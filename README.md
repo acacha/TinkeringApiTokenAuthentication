@@ -161,8 +161,38 @@ https://laravel.com/docs/5.5/passport#consuming-your-api-with-javascript
 
 Crea una cookie **laravel_token** amb un JWT xifrat que s'utilitza per fer autenticació
 
+LARAVEL PASSPORT GUARD
+----------------------
+
+Fitxer Laravel\Passport\Guards\TokenGuard
+
+Mètode user():
+
+```
+ /**
+     * Get the user for the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
+     * @return mixed
+     */
+    public function user(Request $request)
+    {
+        if ($request->bearerToken()) {
+            return $this->authenticateViaBearerToken($request);
+        } elseif ($request->cookie(Passport::cookie())) {
+            return $this->authenticateViaCookie($request);
+        }
+    }
+```
+
+Obté de la cookie (posada pel middleware CreateFreshApiToken) o pel sistema de header authoritzacio
+
 JWT
 ---
 
-TODO
+Paquet: firebase/php-jwt
+
+Laravel utilitza paquet: "firebase/php-jwt": "~3.0|~4.0|~5.0",
+
 
