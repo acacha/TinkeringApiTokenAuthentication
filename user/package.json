@@ -81,10 +81,12 @@
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
       ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
     },
-    "setupFiles": ["<rootDir>/test/unit/setup"],
+    "setupFiles": [
+      "<rootDir>/test/unit/setup"
+    ],
     "mapCoverage": true,
     "coverageDirectory": "<rootDir>/test/unit/coverage",
-    "collectCoverageFrom" : [
+    "collectCoverageFrom": [
       "src/**/*.{js,vue}",
       "!src/main.js",
       "!src/router/index.js",
