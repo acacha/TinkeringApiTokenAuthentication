@@ -1,6 +1,11 @@
 <template>
     <div class="container">
         <div class="row">
+            <div class="alert alert-danger" v-if="error">
+                <strong>Error!</strong> {{ error_message }}
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">User</div>
@@ -21,7 +26,9 @@
     export default {
       data() {
         return {
-          user : {}
+          user : {},
+          error: false,
+          error_message : ''
         }
       },
       mounted() {
@@ -30,6 +37,8 @@
           this.user = response.data
           console.log(response.data)
         }).catch( error => {
+          this.error = true
+          this.error_message = error.message
           console.log(error)
         })
       }
