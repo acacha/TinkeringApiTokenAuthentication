@@ -20,3 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::view('user','user')->middleware('auth');
+
+Route::view('user2','user2')->middleware('auth');
+
+Route::view('user3','user3')->middleware('auth');

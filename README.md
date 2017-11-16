@@ -36,6 +36,15 @@ Si el treieu el únic camp a les peticions axios serà el no xifrat:
 
 X-XSRF-TOKEN no estarà
 
+
+AXIOS
+-----
+
+Utilitza directament el valor de la cookie XSRF-TOKEN i el posa al header axios per defecte
+
+// `xsrfCookieName` is the name of the cookie to use as a value for xsrf token
+  xsrfCookieName: 'XSRF-TOKEN', // default
+
 LARAVEL GUARDS
 --------------
 
@@ -117,7 +126,9 @@ A la migració users afegir:
 	$table->string('api_token', 60)->unique();
 ```
 
-Afegir el camp 'api_token' al fillable del model User.
+Afegir el camp 'api_token' al fillable del model User. 
+
+SEGURETAT: També afegir a hidden!!!!!!!!!!!
 
 Modificar el fitxer *app/Http/Controllers/Auth/RegisterController.php* i afegir el camp api_token:
 
@@ -138,4 +149,20 @@ protected function create(array $data)
 LARAVEL PASSPORT
 ----------------
 
-Més elaborat: tot un sistema Oauth 
+Més elaborat: tot un sistema Oauth. Només cal seguir les passes de:
+
+https://laravel.com/docs/5.5/passport
+
+Hi ha un middleware **\Laravel\Passport\Http\Middleware\CreateFreshApiToken::class**
+
+Llegiu:
+
+https://laravel.com/docs/5.5/passport#consuming-your-api-with-javascript
+
+Crea una cookie **laravel_token** amb un JWT xifrat que s'utilitza per fer autenticació
+
+JWT
+---
+
+TODO
+

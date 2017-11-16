@@ -45,6 +45,13 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        // Added as example by Sergi Tur. Not available by default!
+        // https://laravel.com/docs/5.5/passport
+        'api_passport' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
     ],
 
     /*

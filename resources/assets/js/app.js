@@ -16,6 +16,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('user', require('./components/UserComponent.vue'));
+Vue.component('user2', require('./components/User2Component.vue'));
+Vue.component('user3', require('./components/User3Component.vue'));
 
 const app = new Vue({
     el: '#app'

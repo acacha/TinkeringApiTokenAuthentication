@@ -38,6 +38,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="/user">User 1</a></li>
                         <li><a href="/user2">User 2</a></li>
+                        <li><a href="/user3">User 3</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

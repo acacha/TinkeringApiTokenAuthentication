@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">User. Not authorized. Axios request not authorized (API GUARD | Driver: token)</div>
+                    <div class="panel-heading">User 3. Authorized via Laravel passport (Especial api_passport GUARD | Driver: passport)</div>
 
                     <div class="panel-body">
                         {{ user }}
@@ -33,7 +33,7 @@
       },
       mounted() {
         console.log('Component mounted.')
-        axios.get('/api/user').then( response => {
+        axios.get('/api/passport/user').then( response => {
           this.user = response.data
           console.log(response.data)
         }).catch( error => {
