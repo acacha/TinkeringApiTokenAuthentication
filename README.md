@@ -1,9 +1,11 @@
 HTTP REQUEST HEADERS
 --------------------
 
+ CSRF at OWASP: https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet#Synchronizer_.28CSRF.29_Tokens
+
 CSRF tokens:
 - X-CSRF-TOKEN: Plain value. Meta field on HTML
-- X-XSRF-TOKEN: Encrypted value . Laravel utiltiza una Encrypted cookie amb el mateix nom.
+- X-XSRF-TOKEN: Encrypted value . Laravel utilitza una Encrypted cookie amb el mateix nom.
 Examples:
 - X-CSRF-TOKEN:T65UPXYzRHZgje7qxXuXoXuRAiiwwVjV5hVB6Dzi
 - X-XSRF-TOKEN:eyJpdiI6IjVhVDg2YjBmQ3RrSHRlTHArVHZcL0N3PT0iLCJ2YWx1ZSI6IlAxbHFIa2RyaXlocHMyWlM1c1pKODNxUXVxYnE2NEk4ZExGbnR0R2t6QUdDUTBacXZmVHNleEE3K2Q0OVRLaVYxWGo1RnFjNjkxbUxGblwvb3VjQmFJUT09IiwibWFjIjoiZDlkYTM0ZjQ2NjY0OGVlYzZmNGE4YjNiMDMyMTUxNTExNjAyMGI1MWM5MTE2NDQ3ODQxN2VhYzQxYWQzMGY0YyJ9
@@ -159,6 +161,14 @@ Llegiu:
 
 https://laravel.com/docs/5.5/passport#consuming-your-api-with-javascript
 
+Patró de disseny tokens: Synchronizer token pattern, 
+
+I també (https://mattstauffer.com/blog/introducing-laravel-passport/):
+
+CreateFreshApiToken adds a JWT token as a cookie to anyone who's logged in using Laravel's traditional auth. Using the Synchronizer token pattern, Passport embeds a CSRF token into this cookie-held JWT token. Passport-auth'ed routes will first check for a traditional API token; if it doesn't exist, they'll secondarily check for one of these cookies. If this cookie exists, it will check for this embedded CSRF token to verify it.
+So, in order to make all of your JavaScript requests authenticate to your Passport-powered API using this cookie, you'll need to add a request header to each AJAX request: set the header X-CSRF-TOKEN equal to the CSRF token for that page.
+If you're using Laravel's scaffold, that'll be available as Laravel.csrfToken; if not, you can echo that value using the csrf_token() helper.
+
 Crea una cookie **laravel_token** amb un JWT xifrat que s'utilitza per fer autenticació
 
 LARAVEL PASSPORT GUARD
@@ -191,11 +201,25 @@ Obté de la cookie (posada pel middleware CreateFreshApiToken) o pel sistema de 
 JWT
 ---
 
-ES pot veure el format i pegar el token de Laravel aquí:
+Format
+
+https://scotch.io/tutorials/the-anatomy-of-a-json-web-token
+
+Exemple ús amb Laravel:
+
+https://scotch.io/tutorials/token-based-authentication-for-angularjs-and-laravel-apps
+
+Es pot veure el format i pegar el token de Laravel aquí:
 
 https://jwt.io/
 
+COM FUNCIONA -> Gràfiques?
 
+https://www.toptal.com/web/cookie-free-authentication-with-json-web-tokens-an-example-in-laravel-and-angularjs
+
+Paquets 
+
+https://github.com/tymondesigns/jwt-auth
 
 Paquet: firebase/php-jwt
 
@@ -207,6 +231,22 @@ Docs:
 
 OAUTH
 -----
+
+## GRANTS
+
+Tipus de grants:
+
+- Client Credentials	When two machines need to talk to each other, e.g. two APIs
+- Authorization Code	This is the flow that occurs when you login to a service using Facebook, Google, GitHub etc.
+- Implicit Grant	Similar to Authorization Code, but user-based. Has two distinct differences. Outside the scope of this article.
+- Password Grant	When users login using username+password. The focus of this article.
+- Refresh Grant	Used to generate a new token when the old one expires. Also the focus of this article.
+- http://esbenp.github.io/2017/03/19/modern-rest-api-laravel-part-4/
+
+
+
+Quin utilitzar? Consultar diagram de:
+- https://oauth2.thephpleague.com/authorization-server/which-grant/
 
 ## Another client. Pure Vue.js Javascript app (axios)
 
